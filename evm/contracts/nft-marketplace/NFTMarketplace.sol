@@ -5,8 +5,13 @@ import {AccessControlDefaultAdminRules} from "@openzeppelin/contracts/access/ext
 import {INFTMarketplace} from "./interfaces/INFTMarketplace.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {IERC721} from "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+import {IERC721Receiver} from "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 
-contract NFTMarketPlace is INFTMarketplace, AccessControlDefaultAdminRules {
+contract NFTMarketplace is
+    INFTMarketplace,
+    AccessControlDefaultAdminRules,
+    IERC721Receiver
+{
     bytes32 public immutable override FEE_MANAGER = keccak256("FEE_MANAGER");
     address public override feeTo;
     uint256 public override feeRate = 300; //0.3%
@@ -14,7 +19,7 @@ contract NFTMarketPlace is INFTMarketplace, AccessControlDefaultAdminRules {
     address public override token;
     address public override nft;
 
-    mapping(uint256 => Listing) override public listings;
+    mapping(uint256 => Listing) public override listings;
 
     constructor(
         address _token,
@@ -22,6 +27,7 @@ contract NFTMarketPlace is INFTMarketplace, AccessControlDefaultAdminRules {
     ) AccessControlDefaultAdminRules(0, msg.sender) {
         token = _token;
         nft = _nft;
+        feeTo = msg.sender;
     }
 
     // MODIFIERS
@@ -90,4 +96,14 @@ contract NFTMarketPlace is INFTMarketplace, AccessControlDefaultAdminRules {
     }
 
     // EXTERNAL READ FUNCTIONS
+
+    // CALLBACKS
+    function onERC721Received(
+        address,
+        address,
+        uint256,
+        bytes calldata
+    ) external pure returns (bytes4) {
+        return IERC721Receiver.onERC721Received.selector;
+    }
 }
