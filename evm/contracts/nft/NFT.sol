@@ -13,7 +13,7 @@ contract NFT is INFT, ERC721URIStorage, AccessControlDefaultAdminRules {
     bytes32 public override immutable UPDATER = keccak256("UPDATER");
     bytes32 public override immutable BURNER = keccak256("BURNER");
  
-    constructor(
+    constructor( 
         string memory _name,
         string memory _symbol
     ) ERC721(_name, _symbol) AccessControlDefaultAdminRules(0, msg.sender) {}
@@ -46,8 +46,6 @@ contract NFT is INFT, ERC721URIStorage, AccessControlDefaultAdminRules {
 
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, tokenURI);
-
-        emit Mint(to, tokenId);
     }
 
     function updateTokenURI(
@@ -55,13 +53,9 @@ contract NFT is INFT, ERC721URIStorage, AccessControlDefaultAdminRules {
         string memory tokenURI
     ) external override onlyRole(UPDATER) {
         _setTokenURI(tokenId, tokenURI);
-
-        emit TokenURIUpdated(tokenId);
     }
 
     function burn(uint256 tokenId) external override onlyRole(BURNER) {
         _burn(tokenId);
-
-        emit Burn(tokenId);
     }
 }
