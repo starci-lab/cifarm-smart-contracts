@@ -5,7 +5,6 @@ import {INFT} from "./interfaces/INFT.sol";
 import {ERC721URIStorage} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {AccessControlDefaultAdminRules} from "@openzeppelin/contracts/access/extensions/AccessControlDefaultAdminRules.sol";
-import {INFTErrors} from "./interfaces/INFTErrors.sol";
 
 contract NFT is INFT, ERC721URIStorage, AccessControlDefaultAdminRules {
     uint256[] private _tokenIds;
