@@ -14,7 +14,7 @@ describe("NFT", () => {
         initialized = await initialize()
     })
 
-    describe("Should add roles successfully", function () {
+    describe("Should admin add roles successfully", function () {
         it("Should add minter successfully", async function () {
             const {
                 contracts: { nftContract },
@@ -27,7 +27,7 @@ describe("NFT", () => {
             const hasRole2 = await nftContract.hasRole(minter, signers[2].address)
             expect(hasRole2).to.eq(false, "Signer 2 must not have role minter")
         })
-        it("Should add burner successfully", async function () {
+        it("Should admin add burner successfully", async function () {
             const {
                 contracts: { nftContract },
                 signers,
