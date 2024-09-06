@@ -68,7 +68,7 @@ contract NFTMarketPlace is INFTMarketplace, AccessControlDefaultAdminRules {
         listing.price = price;
         listings[tokenId] = listing;
 
-        emit PriceSet(tokenId, price);
+        emit PriceUpdated(tokenId, price);
     }
 
     function buy(uint256 tokenId) external {

@@ -6,6 +6,6 @@ interface INFTMarketplaceEvents {
     event FeeToUpdated(address feeTo);
     event List(uint256 indexed tokenId, address seller, uint256 price);
     event Unlist(uint256 indexed tokenId);
-    event PriceSet(uint256 indexed tokenId, uint256 price);
+    event PriceUpdated(uint256 indexed tokenId, uint256 price);
     event Buy(uint256 indexed tokenId, address buyer, uint256 price);
 }
