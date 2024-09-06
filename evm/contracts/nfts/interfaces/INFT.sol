@@ -2,4 +2,6 @@
 pragma solidity ^0.8.24;
 
 import {INFTWrite} from "./INFTWrite.sol";
-interface INFT is INFTWrite {}
+import {INFTEvents} from "./INFTEvents.sol";
+
+interface INFT is INFTWrite, INFTEvents {}
