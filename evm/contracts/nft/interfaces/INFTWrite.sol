@@ -7,7 +7,7 @@ interface INFTWrite {
         string memory tokenURI
     ) external returns (uint256 tokenId);
 
-    function setTokenURI(uint256 tokenId, string memory tokenURI) external;
+    function updateTokenURI(uint256 tokenId, string memory tokenURI) external;
 
     function burn(uint256 tokenId) external;
 }
