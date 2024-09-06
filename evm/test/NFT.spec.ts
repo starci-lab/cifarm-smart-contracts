@@ -68,6 +68,25 @@ describe("NFT", () => {
         const cid = await nftContract.tokenURI(tokenId)
         expect(cid).to.eq(SAMPLE_IPFS, "Mint failed")
     })
+    it("Should mint 100 NFTs successfully", async function () {
+        const {
+            contracts: { nftContract },
+            signers,
+        } = initialized
+        const minter = await nftContract.MINTER()
+        await nftContract.grantRole(minter, signers[1].address)
+        for (let i = 0; i < 100; i++) {
+            const tokenId = await nftContract
+                .connect(signers[1])
+                .getFunction("mint")
+                .staticCall(signers[2].address, SAMPLE_CID)
+            await nftContract
+                .connect(signers[1])
+                .mint(signers[2].address, SAMPLE_CID)
+            const cid = await nftContract.tokenURI(tokenId)
+            expect(cid).to.eq(SAMPLE_IPFS, "Mint failed")
+        }
+    })
     it("Should non-minter mint failed", async function () {
         const {
             contracts: { nftContract },
