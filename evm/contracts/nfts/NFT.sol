@@ -15,9 +15,12 @@ contract NFT is INFT, ERC721URIStorage, AccessControlDefaultAdminRules {
 
     constructor(
         string memory _name,
-        string memory _symbol,
-        address minter
+        string memory _symbol
     ) ERC721(_name, _symbol) AccessControlDefaultAdminRules(0, msg.sender) {}
+
+    function _baseURI() internal view virtual override returns (string memory) {
+        return "https://ipfs.io/ipfs/";
+    }
 
     function supportsInterface(
         bytes4 interfaceId
@@ -53,9 +56,7 @@ contract NFT is INFT, ERC721URIStorage, AccessControlDefaultAdminRules {
         emit TokenURISet(tokenId);
     }
 
-    function burn(
-        uint256 tokenId
-    ) external override onlyRole(BURNER) {
+    function burn(uint256 tokenId) external override onlyRole(BURNER) {
         _burn(tokenId);
 
         emit Burn(tokenId);
