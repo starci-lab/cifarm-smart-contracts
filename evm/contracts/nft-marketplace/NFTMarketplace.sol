@@ -14,7 +14,7 @@ contract NFTMarketPlace is INFTMarketplace, AccessControlDefaultAdminRules {
     address public override token;
     address public override nft;
 
-    mapping(uint256 => Listing) private _listings;
+    mapping(uint256 => Listing) override public listings;
 
     constructor(
         address _token,
@@ -43,36 +43,36 @@ contract NFTMarketPlace is INFTMarketplace, AccessControlDefaultAdminRules {
         IERC721(nft).safeTransferFrom(msg.sender, address(this), tokenId);
 
         Listing memory listing = Listing({price: price, seller: msg.sender});
-        _listings[tokenId] = listing;
+        listings[tokenId] = listing;
 
         emit List(tokenId, msg.sender, price);
     }
 
     function unlist(uint256 tokenId) external override {
-        Listing memory listing = _listings[tokenId];
+        Listing memory listing = listings[tokenId];
         if (msg.sender != listing.seller) {
             revert SenderNotSeller(msg.sender);
         }
         IERC721(nft).safeTransferFrom(address(this), msg.sender, tokenId);
 
-        delete _listings[tokenId];
+        delete listings[tokenId];
         emit Unlist(tokenId);
     }
 
     function setPrice(uint256 tokenId, uint256 price) external override {
-        Listing memory listing = _listings[tokenId];
+        Listing memory listing = listings[tokenId];
         if (msg.sender != listing.seller) {
             revert SenderNotSeller(msg.sender);
         }
 
         listing.price = price;
-        _listings[tokenId] = listing;
+        listings[tokenId] = listing;
 
         emit PriceSet(tokenId, price);
     }
 
     function buy(uint256 tokenId) external {
-        Listing memory listing = _listings[tokenId];
+        Listing memory listing = listings[tokenId];
         if (msg.sender == listing.seller) {
             revert SenderIsSeller(msg.sender);
         }
@@ -85,7 +85,7 @@ contract NFTMarketPlace is INFTMarketplace, AccessControlDefaultAdminRules {
         IERC20(token).transferFrom(msg.sender, listing.seller, net);
         IERC20(token).transferFrom(msg.sender, feeTo, fee);
 
-        delete _listings[tokenId];
+        delete listings[tokenId];
         emit Buy(tokenId, msg.sender, listing.price);
     }
 

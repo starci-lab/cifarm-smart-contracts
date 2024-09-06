@@ -16,4 +16,8 @@ interface INFTMarketplaceRead {
         address seller;
         uint256 price;
     }
+
+    function listings(
+        uint256 tokenId
+    ) external returns (address seller, uint256 price);
 }
