@@ -39,6 +39,18 @@ describe("NFT", () => {
             const hasRole2 = await nftContract.hasRole(burner, signers[2].address)
             expect(hasRole2).to.eq(false, "Signer 2 must not have role burner")
         })
+        it("Should admin add updater successfully", async function () {
+            const {
+                contracts: { nftContract },
+                signers,
+            } = initialized
+            const updater = await nftContract.UPDATER()
+            await nftContract.grantRole(updater, signers[1].address)
+            const hasRole = await nftContract.hasRole(updater, signers[1].address)
+            expect(hasRole).to.eq(true, "Signer 1 do not have role updater")
+            const hasRole2 = await nftContract.hasRole(updater, signers[2].address)
+            expect(hasRole2).to.eq(false, "Signer 2 must not have role updater")
+        })
         it("Should minter mint successfully", async function () {
             const {
                 contracts: { nftContract },
