@@ -24,7 +24,22 @@ const config: HardhatUserConfig = {
     },
     sourcify: {
         enabled: true
-    }
+    },
+    etherscan: {
+        apiKey: {
+            snowtrace: "snowtrace", // apiKey is not required, just set a placeholder
+        },
+        customChains: [
+            {
+                network: "fuji",
+                chainId: 43113,
+                urls: {
+                    apiURL: "https://api.routescan.io/v2/network/testnet/evm/43113/etherscan",
+                    browserURL: "https://avalanche.testnet.localhost:8080"
+                }
+            }
+        ]
+    },
 }
 //npx hardhat verify --network fuji 0xD47362B39B5265F83EC9059FD7a8B963140A5CeD
 export default config
