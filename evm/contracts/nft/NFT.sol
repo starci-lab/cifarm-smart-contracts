@@ -7,8 +7,6 @@ import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import {AccessControlDefaultAdminRules} from "@openzeppelin/contracts/access/extensions/AccessControlDefaultAdminRules.sol";
 
 contract NFT is INFT, ERC721URIStorage, AccessControlDefaultAdminRules {
-    uint256[] private _tokenIds;
-
     bytes32 public override immutable MINTER = keccak256("MINTER");
     bytes32 public override immutable UPDATER = keccak256("UPDATER");
     bytes32 public override immutable BURNER = keccak256("BURNER");
@@ -19,7 +17,7 @@ contract NFT is INFT, ERC721URIStorage, AccessControlDefaultAdminRules {
     ) ERC721(_name, _symbol) AccessControlDefaultAdminRules(0, msg.sender) {}
 
     function _baseURI() internal view virtual override returns (string memory) {
-        return "https://ipfs.io/ipfs/";
+        return "https://ipfs.starci.net/ipfs/";
     }
 
     function supportsInterface(
@@ -35,15 +33,10 @@ contract NFT is INFT, ERC721URIStorage, AccessControlDefaultAdminRules {
     }
 
     function mint(
+        uint256 tokenId,
         address to,
         string memory tokenURI
-    ) external override onlyRole(MINTER) returns (uint256 tokenId) {
-        uint256 length = _tokenIds.length;
-        if (length > 0) {
-            tokenId = _tokenIds[_tokenIds.length - 1] + 1;
-        }
-        _tokenIds.push(tokenId);
-
+    ) external override onlyRole(MINTER) {
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, tokenURI);
     }

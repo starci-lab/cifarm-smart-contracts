@@ -3,9 +3,10 @@ pragma solidity ^0.8.24;
 
 interface INFTWrite {
     function mint(
+        uint256 tokenId,
         address to,
         string memory tokenURI
-    ) external returns (uint256 tokenId);
+    ) external;
 
     function updateTokenURI(uint256 tokenId, string memory tokenURI) external;
 
