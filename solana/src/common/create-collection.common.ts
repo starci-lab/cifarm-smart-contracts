@@ -1,4 +1,3 @@
-import 'dotenv/config'
 import { umi as baseUmi } from './my-keypair.common'
 import { generateSigner, percentAmount, Umi } from '@metaplex-foundation/umi';
 import { createNft } from '@metaplex-foundation/mpl-token-metadata';
