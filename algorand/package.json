@@ -1,0 +1,32 @@
+{
+    "name": "solana",
+    "version": "1.0.0",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "ts-node -r tsconfig-paths/register src/main.ts | pino-pretty "
+    },
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "@pinata/sdk": "^2.1.0",
+        "algosdk": "^3.0.0",
+        "dotenv": "^16.4.5",
+        "multiformats": "^9.9.0",
+        "pino": "^9.5.0",
+        "uuid": "^10.0.0",
+        "v4": "^0.0.1"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.13.0",
+        "@types/bs58": "^4.0.4",
+        "@types/node": "^22.7.7",
+        "@types/uuid": "^10.0.0",
+        "eslint": "^9.13.0",
+        "globals": "^15.11.0",
+        "ts-node": "^10.9.2",
+        "tsconfig-paths": "^4.2.0",
+        "typescript-eslint": "^8.10.0"
+    }
+}

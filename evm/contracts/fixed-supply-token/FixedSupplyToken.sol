@@ -2,8 +2,9 @@
 pragma solidity ^0.8.24;
 
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import {Multicall} from "@openzeppelin/contracts/utils/Multicall.sol";
 
-contract FixedSupplyToken is ERC20 {
+contract FixedSupplyToken is ERC20, Multicall {
     constructor(
         string memory _name,
         string memory _symbol,

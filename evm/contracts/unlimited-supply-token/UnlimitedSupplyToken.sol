@@ -4,11 +4,13 @@ pragma solidity ^0.8.24;
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {IUnlimitedSupplyToken} from "./interfaces/IUnlimitedSupplyToken.sol";
 import {AccessControlDefaultAdminRules} from "@openzeppelin/contracts/access/extensions/AccessControlDefaultAdminRules.sol";
+import {Multicall} from "@openzeppelin/contracts/utils/Multicall.sol";
 
 contract UnlimitedSupplyToken is
     IUnlimitedSupplyToken,
     ERC20,
-    AccessControlDefaultAdminRules
+    AccessControlDefaultAdminRules,
+    Multicall
 {
     bytes32 public immutable override MINTER = keccak256("MINTER");
     bytes32 public immutable override BURNER = keccak256("BURNER");

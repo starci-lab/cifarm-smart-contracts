@@ -6,11 +6,13 @@ import {INFTMarketplace} from "./interfaces/INFTMarketplace.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {IERC721} from "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import {IERC721Receiver} from "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
+import {Multicall} from "@openzeppelin/contracts/utils/Multicall.sol";
 
 contract NFTMarketplace is
     INFTMarketplace,
     AccessControlDefaultAdminRules,
-    IERC721Receiver
+    IERC721Receiver,
+    Multicall
 {
     bytes32 public immutable override FEE_MANAGER = keccak256("FEE_MANAGER");
     address public override feeTo;

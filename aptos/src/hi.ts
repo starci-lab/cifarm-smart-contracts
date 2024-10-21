@@ -5,7 +5,7 @@ async function main() {
   const aptos = new Aptos(config);
 
   const creator = Account.fromPrivateKey({
-    privateKey: new Ed25519PrivateKey("0x4c601560512d632f01115bf896875f810ccfd054360821c1f8e6f4c3ecbed633")
+    privateKey: new Ed25519PrivateKey("0xd5468cc050f5f3f638dfcc3f002a8cf89e4cb0a1f32362dbd09ca2a7329d98aa")
   }); 
 
   // const createCollectionTransaction = await aptos.createCollectionTransaction({
@@ -33,9 +33,9 @@ async function main() {
     //   transaction: mintTokenTransaction,
     // });
 
-    const tx= await aptos.transferDigitalAssetTransaction({
-      recipient: AccountAddress.from("0x952cd4d00514fd1eb9cc3e2e683c1a2e1815cd3a06aee3356151c42cb1943d90"),
-      digitalAssetAddress: "0x7b08b5c2ab654d75fd5b4a24b834be00b8c7621ec23f3e674b2517fd8fbf463b",
+    const tx = await aptos.transferDigitalAssetTransaction({
+      recipient: AccountAddress.from("0x7009896a064b72436fbd169989130be11cdf134bdf20dff4313343ad5ccd564d"),
+      digitalAssetAddress: "0x787ecdf9d1868ea255727acbd13eda22cde3d67b9342a14fe2d9a3d136e8136c",
       sender: creator,
     })
          await aptos.signAndSubmitTransaction({
