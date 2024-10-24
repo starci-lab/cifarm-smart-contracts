@@ -62,7 +62,10 @@ export class ARC19Service {
         }
 
         const { IpfsHash } = await this.pinataService.pinJSON(_metadata)
+        logger().info(`Metadata pinned to IPFS with hash: ${IpfsHash}`)
+
         const { reserveAddress, url } = this.pinataService.cidToReserveURL(IpfsHash)
+        logger().info(`Reserve address: ${reserveAddress}`)
 
         const params = await this.client.getTransactionParams().do()
 

@@ -11,6 +11,10 @@
     "description": "",
     "dependencies": {
         "@pinata/sdk": "^2.1.0",
+        "@polkadot/util-crypto": "^13.2.1",
+        "@unique-nft/accounts": "^0.3.7",
+        "@unique-nft/sdk": "^2.1.2",
+        "@unique-nft/sr25519": "^0.0.2",
         "algosdk": "^3.0.0",
         "dotenv": "^16.4.5",
         "multiformats": "^9.9.0",
